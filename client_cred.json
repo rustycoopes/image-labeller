@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rustyware-dev",
+  "private_key_id": "ff3ba221c39cf24377c84fdbdd0e216cccf985eb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwZgFIumj0dhrC\nAK0scxoMoN4Q3mMj5AB4WgPbfgzMH2s/AaYIkOzvd+xkt4ZKaS7y+NFmw39IKwr/\ndP5YSjL1kcE8RtJcK32Eqh+4wqq0OUkAYbDnlTLhnR/Qif0L7OL0Jm/FB/qVreeh\n5hyRYS7MUqYTmG2ytZkLhqtXOt3aVqdvVi7tsCAcGelSr9F/j/ZdF0q/jtNNvtWe\nAziGAvf0udVxhLjSfyEy4NAccwD+GxUZqg45mOgxiL6NhWi98z87l/ne4sm4cDOx\neGX0vzNaXokbqQvFi0CWDz9FzTRL2npuj/WohRTuAkn8JdlFZLOtOGiUfR378WfY\naTWVNfXlAgMBAAECggEAD7k79pFlLxtC9dWNGif1Y7hIKx1DnYyijRfK/brt5ZkM\nXHynYd6XPB5GtFCWmBXpoS9ULRKSiyqJC63QSSruAW05WgffEueug8+NTdEOWcu8\nadwLYo0uUKWKkzJlm7VFIqm1b0zvhX2PpuMF22CcBQr98kO1TYd56ajap4cgBOjs\nArE1lctOHCnokX+SeIWTc6OMEGeF2C7sl7Sg439bSCpcg6dMwbbNWB7IZaL96xD1\nTIr9mVmltOEKF5BbnpfVpCtbhsxjZix8jIUBt7uM66JyVGTC7aJrlZhEo3xCjVSM\ne3BmXLCtjbHnJbRnZZZOS+MeUhZKALeWGap9dJcBwQKBgQDjCe3sY3sRzjf7px1B\nAdlJCEphvrNwajKkTTaImawnouDk9wAXemr02a1UEJzLk/XiCHE2jBMrdA+Iwhmx\nePVZKTf+jhajpDoL2zfXMwFwT4Hf8I9PZyRyzq6Fx+UZQtXlScopZ0laRm+44ym3\nwNPrbWBFc6EkP66Zceql2hK+pQKBgQDG5mOdEOaE7A8ZZe6z2gjYa9cUPIGrtnmy\ny19QJ5OM6Kf+I7xdjNELq9Vzosb3i7Jj9lA0YVvtmd4trAYun0dxyeSA1f0Zy4Pa\npLKNKzA1Y5u6eWsUAeCFqxMxP2BdIzKJ51mCoQynMSe2ay7Da58mb/cRGOwvl8v3\nuZEgO232QQKBgQDgz642CnOMuAQbPejru+bqODle/DQ2NhIbOxGqxXAAd3n1ftcq\naF+MQBcvTJvVwZcR0IY6Gw3IU04mfvxuDXX0aao2d3/XXgDUSKfMgYcFLNVPZ6ag\nW2NuA1YwxjUGhHXEawKxaMLrjx+FlfpzJ48waceQPeTsPdqnunM88ujouQKBgFel\nSDn7K4lhOBoaB8CrEIDFrIYXT5CqHSCDa6G3ftZ14yki+CtFFQ0OkEWfcgu9PEO+\nU4Nxb3/Y8MWxaxv6RhJHQ/Dd2uUWAClFsARzBpBQL1xRirTLSvO7+f4WjlEcZHXO\nQ2xDqX63M2e3/WhRsVTPu9CF6fXi7xdfZysL5R3BAoGBAOCsJ0eqlyTCuvZcqDdO\ngkSOigBe6/GxCZJp4A8td/OZoYeThYqytUwBj6mlOY9Qtb9W51nC4VHecppbQOF4\n+dG4gGWo+3GxgkeBRhmmClZu4nFCT7ZXZgsEPhzZJ5O8HjAXoC5LnUOQbJ2KBjM2\nerL8LKn4ChpZHob8UfGNDSD6\n-----END PRIVATE KEY-----\n",
+  "client_email": "dev-image-labeller@rustyware-dev.iam.gserviceaccount.com",
+  "client_id": "113910032119868001994",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dev-image-labeller%40rustyware-dev.iam.gserviceaccount.com"
+}
