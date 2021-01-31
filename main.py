@@ -60,7 +60,7 @@ def image_labeller_process_subscriber(request):
          metadata. The `event_id` field contains the Pub/Sub message ID. The
          `timestamp` field contains the publish time.
     """
-    print ("in gunction")
+    print ("in function")
     request_json = request.get_json(silent=True)
     request_args = request.args
 
@@ -70,6 +70,7 @@ def image_labeller_process_subscriber(request):
         name = request_args['name']
     else:
         name = 'World'
+    print('Hello {}!'.format(escape(name)))
     return 'Hello {}!'.format(escape(name))
 # [END functions_helloworld_pubsub]
 
