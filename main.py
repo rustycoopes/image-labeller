@@ -50,7 +50,7 @@ def hello_http(request):
 
 
 # [START functions_helloworld_pubsub]
-def hello_pubsub(event, context):
+def image_labeller_process_subscriber(event, context):
     """Background Cloud Function to be triggered by Pub/Sub.
     Args:
          event (dict):  The dictionary with data specific to this type of

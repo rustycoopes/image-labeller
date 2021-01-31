@@ -4,7 +4,7 @@ steps:
   - beta
   - functions
   - deploy
-  - hello_get
+  - image_labeller_process_subscriber
   - --source=.
   - --trigger-http
   - --allow-unauthenticated
