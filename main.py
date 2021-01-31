@@ -21,7 +21,7 @@ def hello_get(request):
         Response object using `make_response`
         <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
     """
-    return 'Hello World!'
+    return 'Hello Rusty World!'
 # [END functions_helloworld_get]
 
 
