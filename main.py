@@ -32,7 +32,7 @@ def image_labeller_process_subscriber(request):
     request_args = request.args
     print(request_json)
     if request_json and 'message' in request_json:
-        name = request_json['message']['data'].decode("utf-8")
+        name = request_json['message']['data']
     else:
         name = 'World'
     print('Hello {}!'.format(escape(name)))
