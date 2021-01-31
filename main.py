@@ -50,7 +50,7 @@ def hello_http(request):
 
 
 # [START functions_helloworld_pubsub]
-def image_labeller_process_subscriber(event, context):
+def image_labeller_process_subscriber(request):
     """Background Cloud Function to be triggered by Pub/Sub.
     Args:
          event (dict):  The dictionary with data specific to this type of
@@ -60,16 +60,17 @@ def image_labeller_process_subscriber(event, context):
          metadata. The `event_id` field contains the Pub/Sub message ID. The
          `timestamp` field contains the publish time.
     """
-    import base64
+    print ("in gunction")
+    request_json = request.get_json(silent=True)
+    request_args = request.args
 
-    print("""This Function was triggered by messageId {} published at {}
-    """.format(context.event_id, context.timestamp))
-
-    if 'data' in event:
-        name = base64.b64decode(event['data']).decode('utf-8')
+    if request_json and 'name' in request_json:
+        name = request_json['name']
+    elif request_args and 'name' in request_args:
+        name = request_args['name']
     else:
         name = 'World'
-    print('Hello {}!'.format(name))
+    return 'Hello {}!'.format(escape(name))
 # [END functions_helloworld_pubsub]
 
 
