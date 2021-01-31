@@ -5,6 +5,7 @@ import sys
 # [START functions_http_content]
 from flask import escape
 
+import base64
 # [END functions_helloworld_http]
 # [END functions_http_content]
 
@@ -32,7 +33,7 @@ def image_labeller_process_subscriber(request):
     request_args = request.args
     print(request_json)
     if request_json and 'message' in request_json:
-        name = request_json['message']['data']
+        name =  base64.b64decode(request_json['message']['data']).decode('utf-8')
     else:
         name = 'World'
     print('Hello {}!'.format(escape(name)))
