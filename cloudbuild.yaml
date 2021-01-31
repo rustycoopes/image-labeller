@@ -6,6 +6,5 @@ steps:
   - deploy
   - hello_get
   - --source=.
-  - --runtime python37
   - --trigger-http
   - --allow-unauthenticated
