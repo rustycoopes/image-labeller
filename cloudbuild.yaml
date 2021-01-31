@@ -6,5 +6,5 @@ steps:
   - hello_get
   - --source=.
   - --trigger-http
-    --allow-unauthenticated
-    --runtime python37 
+  - --allow-unauthenticated
+  - --runtime python37 
