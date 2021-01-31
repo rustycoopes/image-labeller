@@ -64,10 +64,8 @@ def image_labeller_process_subscriber(request):
     request_json = request.get_json(silent=True)
     request_args = request.args
     print(request_json)
-    if request_json and 'name' in request_json:
-        name = request_json['name']
-    elif request_args and 'name' in request_args:
-        name = request_args['name']
+    if request_json and 'message' in request_json:
+        name = request_json['message']['attributes']['name']
     else:
         name = 'World'
     print('Hello {}!'.format(escape(name)))
