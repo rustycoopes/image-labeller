@@ -5,7 +5,6 @@ steps:
   - functions
   - deploy
   - image_labeller_process_subscriber
-  - --runtime python37
   - --source=.
   - --trigger-http
   - --allow-unauthenticated
