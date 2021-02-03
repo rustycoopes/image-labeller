@@ -10,6 +10,11 @@ google-cloud-vision = "*"
 pytest = "*"
 apache-beam = "*"
 flask = "*"
+google-cloud-pubsub = "*"
+googleappenginecloudstorageclient = "*"
+cloudstorage = "*"
+google-cloud-storage = "*"
+google-cloud-bigquery = "*"
 
 [requires]
 python_version = "3.7"

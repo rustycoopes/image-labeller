@@ -4,7 +4,7 @@ from google.cloud import vision
 import os
 import io
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="client_cred.json"
-
+import logging
 def test_call_google_Service():
     client = vision.ImageAnnotatorClient()
     path = './tests/test_photo.jpg'
@@ -18,5 +18,5 @@ def test_call_google_Service():
 
     print('Labels:')
     for label in labels:
-        print("{} : {}".format(label.description, label.score))
+        print("results from image analysis {} : {}".format(label.description, label.score))
     
