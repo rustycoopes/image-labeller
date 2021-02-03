@@ -9,7 +9,7 @@ import base64
 # [END functions_helloworld_http]
 # [END functions_http_content]
 
-
+import external_api.gcp_biquery
 
 
 # [START functions_helloworld_pubsub]
@@ -28,14 +28,13 @@ def image_labeller_process_subscriber(request):
          'publish_time': '2021-01-31T19:04:14.498Z'}, 
          'subscription': 'projects/rustyware-dev/subscriptions/image-labeller-input-subscription'}
     """
-    print ("in function")
     request_json = request.get_json(silent=True)
-    request_args = request.args
     print(request_json)
     if request_json and 'message' in request_json:
-        name =  base64.b64decode(request_json['message']['data']).decode('utf-8')
-    else:
-        name = 'World'
-    print('Hello {}!'.format(escape(name)))
-    return 'Hello {}!'.format(escape(name))
+        fileName =  base64.b64decode(request_json['message']['data']).decode('utf-8')
+        db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
+        db.write_image_data(fileName, '')
+    return 'Writing {}!'.format(escape(fileName))
 # [END functions_helloworld_pubsub]
+
+
