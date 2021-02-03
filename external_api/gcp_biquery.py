@@ -26,7 +26,7 @@ class BQWriter():
         table = client.get_table(table_ref)
 
         #TODO CHECK IF EXISTS FOR IMAGE AND LABEL THEN UPDATE
-        errors = client.insert_rows(table, [('imagepath', image_path), ('label', 'default'), ('confidence',100)])
+        errors = client.insert_rows(table, [( image_path ,'default',100)])
         if not errors:
             logging.info('Saved {} into {}:{}'.format(image_path, self._dataset, self._table))
         else:
