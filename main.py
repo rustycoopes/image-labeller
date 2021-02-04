@@ -32,9 +32,25 @@ def image_labeller_process_subscriber(request):
     print(request_json)
     if request_json and 'message' in request_json:
         fileName =  base64.b64decode(request_json['message']['data']).decode('utf-8')
-        db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
-        db.write_image_data(fileName, '')
+
+        #TODO image send to ML
+
+        store = ImgLabelPersitance()
+        store.persist(fileName, 'defaultlavel', 1)
+
+
     return 'Writing {}!'.format(escape(fileName))
+
+
+
+
+
+class ImgLabelPersitance():
+    def persist(self, fileName, label, confidence):
+        db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
+        db.delete_image_data(fileName)
+        db.write_image_data(fileName, label, confidence)
+
 # [END functions_helloworld_pubsub]
 
 
