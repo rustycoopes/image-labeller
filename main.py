@@ -11,6 +11,8 @@ import base64
 
 import external_api.gcp_biquery
 
+import external_api.dbx
+import configparser
 
 # [START functions_helloworld_pubsub]
 def image_labeller_process_subscriber(request):
@@ -35,15 +37,41 @@ def image_labeller_process_subscriber(request):
 
         #TODO image send to ML
 
-        store = ImgLabelPersitance()
-        store.persist(fileName, 'defaultlavel', 1)
+        config = configparser.ConfigParser()
+        config.read('./config/main.ini')
+        config.read_string(utils_read_dbx_cfg_from_gcs())
+        dropb = external_api.dbx.RussDropBox(config['DROPBOX-SECRETS']['Token'], max_file_count = int(config['DROPBOX']['MaxSize']), batch_size = int(config['DROPBOX']['BatchSize']))
+        image = dropb.get_image(fileName)
 
+        store = ImgLabelPersitance()
+        labels = get_labels(image)
+        for label in labels:
+            print("results for {} from image analysis {} : {}".format(fileName, label.description, label.score))
+            store.persist(fileName, label.description, label.score)
+      
 
     return 'Writing {}!'.format(escape(fileName))
 
 
+def utils_read_dbx_cfg_from_gcs():
+    from google.cloud import storage
+    storage_client = storage.Client()
+    bucket = storage_client.bucket('application-core-config')
+    blob = bucket.blob('core-config.ini')    
+    return blob.download_as_string().decode('utf-8')    
 
+def get_labels(content):
+    import urllib
+    from google.cloud import vision
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image(content=content)
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
 
+    print('Labels:')
+    for label in labels:
+        print("results from image analysis {} : {}".format(label.description, label.score))
+    
 
 class ImgLabelPersitance():
     def persist(self, fileName, label, confidence):

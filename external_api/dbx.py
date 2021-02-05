@@ -38,7 +38,10 @@ class RussDropBox():
                     logging.debug('yield file {}, current count {}'.format(entry.path_lower, totalfile_count))
                     yield entry.path_lower
 
-
+    def get_image(self, path):
+        dbx = dropbox.Dropbox(self._api_key)
+        file = dbx.files_download(path)
+        return file[1].content
 
     def is_image(self, filepath):
         return filepath.endswith(".jpg")
