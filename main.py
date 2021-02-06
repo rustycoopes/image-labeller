@@ -67,10 +67,7 @@ def get_labels(content):
     image = vision.Image(content=content)
     response = client.label_detection(image=image)
     labels = response.label_annotations
-
-    print('Labels:')
-    for label in labels:
-        print("results from image analysis {} : {}".format(label.description, label.score))
+    return labels
     
 
 class ImgLabelPersitance():
