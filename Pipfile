@@ -15,6 +15,7 @@ googleappenginecloudstorageclient = "*"
 cloudstorage = "*"
 google-cloud-storage = "*"
 google-cloud-bigquery = "*"
+dropbox = "*"
 
 [requires]
 python_version = "3.7"
