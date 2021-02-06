@@ -3,7 +3,7 @@ import pytest
 from google.cloud import vision
 import os
 import io
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="client_cred.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\russe\\OneDrive\\dev\\credentials\\gcp-dev-labeller_cred.json"
 import logging
 def test_call_google_Service():
     client = vision.ImageAnnotatorClient()
