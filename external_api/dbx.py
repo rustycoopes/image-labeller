@@ -39,9 +39,11 @@ class RussDropBox():
                     yield entry.path_lower
 
     def get_image(self, path):
+
         dbx = dropbox.Dropbox(self._api_key)
         file = dbx.files_download(path)
         return file[1].content
 
     def is_image(self, filepath):
+        # TODO : MOVE TO IMAGE PROXESSOR, ADD EXCLUSION FOr thumbnial
         return filepath.endswith(".jpg")

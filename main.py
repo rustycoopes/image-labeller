@@ -25,16 +25,16 @@ def image_labeller_process_subscriber(request):
     #print(request_json)
     if request_json and 'message' in request_json:
         fileName =  base64.b64decode(request_json['message']['data']).decode('utf-8')
+        store = ImgLabelPersitance()
+        if store.image_data_exists(fileName):
+            return 'data already processed'
 
         config = configparser.ConfigParser()
         config.read('./config/main.ini')
         config.read_string(utils_read_dbx_cfg_from_gcs())
         dropb = external_api.dbx.RussDropBox(config['DROPBOX-SECRETS']['Token'], max_file_count = int(config['DROPBOX']['MaxSize']), batch_size = int(config['DROPBOX']['BatchSize']))
-
-        store = ImgLabelPersitance()
+        
         image = dropb.get_image(fileName)
-
-        store = ImgLabelPersitance()
         labels = get_labels(image)
         if labels is None:
             print('no labels for image')

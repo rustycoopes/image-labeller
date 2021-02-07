@@ -27,13 +27,33 @@ class BQWriter():
         table_ref = dataset_ref.table(self._table)
         table = client.get_table(table_ref)
 
-        #TODO CHECK IF EXISTS FOR IMAGE AND LABEL THEN UPDATE
+  
         errors = client.insert_rows(table, [( image_path ,label,confidence, None )])
 
         if errors == []:
             logging.debug("New rows have been added")
         else:
             logging.debug("Encountered errors while inserting rows: {}".format(errors))
+
+
+
+    def image_data_exists(self, imagepath):
+        client = bigquery.Client()
+        query_job = client.query(
+            """
+            SELECT
+            *
+            FROM image_labels.labels
+            WHERE imagepath = '{}'""".format(imagepath)
+        )
+
+        results = query_job.result()  # Waits for job to complete.
+
+        if results is not None and results.total_rows > 0:
+            logging.debug('found {} rows for file {}'.format(results.total_rows, imagepath))
+            return True
+        else:
+            return False
 
     def remove_duplicates(self):
         client = bigquery.Client()
