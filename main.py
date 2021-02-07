@@ -91,6 +91,11 @@ class ImgLabelPersitance():
         db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
         db.write_image_data(fileName, label, confidence)
 
+    def image_data_exists(self, fileName):
+        db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
+        db.image_data_exists(fileName)
+
+
 # [END functions_helloworld_pubsub]
 
 
