@@ -31,9 +31,9 @@ class BQWriter():
         errors = client.insert_rows(table, [( image_path ,label,confidence, None )])
 
         if errors == []:
-            print("New rows have been added.")
+            logging.debug("New rows have been added")
         else:
-            print("Encountered errors while inserting rows: {}".format(errors))
+            logging.debug("Encountered errors while inserting rows: {}".format(errors))
 
     def remove_duplicates(self):
         client = bigquery.Client()

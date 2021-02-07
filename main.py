@@ -22,7 +22,7 @@ def image_labeller_process_subscriber(request):
          'subscription': 'projects/rustyware-dev/subscriptions/image-labeller-input-subscription'}
     """
     request_json = request.get_json(silent=True)
-    print(request_json)
+    #print(request_json)
     if request_json and 'message' in request_json:
         fileName =  base64.b64decode(request_json['message']['data']).decode('utf-8')
 
@@ -36,11 +36,15 @@ def image_labeller_process_subscriber(request):
 
         store = ImgLabelPersitance()
         labels = get_labels(image)
+        if labels is None:
+            print('no labels for image')
+            return 'ok - no labels'
+
         for label in labels:
             print("results for {} from image analysis {} : {}".format(fileName, label.description, label.score))
             store.persist(fileName, label.description, label.score)
     
-    return 'Ok added'
+    return 'ok added'
 
 def image_labeller_merge_data(request):
     """Background Cloud Function to be triggered by Pub/Sub.
