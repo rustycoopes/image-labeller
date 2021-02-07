@@ -85,7 +85,6 @@ def get_labels(content):
 class ImgLabelPersitance():
     def persist(self, fileName, label, confidence):
         db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
-        db.delete_image_data(fileName)
         db.write_image_data(fileName, label, confidence)
 
 # [END functions_helloworld_pubsub]

@@ -1,11 +1,9 @@
-SET GOOGLE_APPLICATION_CREDENTIALS=C:\Users\russe\dev\image-labeller\client_cred.json
 SET BUCKET_NAME=rustware-dev-dataflowtest
 SET PROJECT_NAME=$(gcloud config get-value project)
 SET REGION=DATAFLOW_REGION
-SET PUBSUB_TOPIC=rustyware-dev-dataflowtest
 
 gsutil mb gs://%BUCKET_NAME%
-gcloud pubsub topics create %PUBSUB_TOPIC%
+
 gcloud scheduler jobs create pubsub publisher-job --schedule="* * * * *" --topic=%PUBSUB_TOPIC% --message-body="Hello!"
 gcloud scheduler jobs run publisher-job
 
@@ -16,3 +14,15 @@ gcloud pubsub topics delete %PUBSUB_TOPIC%
 gsutil -m rm -rf "gs://${BUCKET_NAME}/samples/output*"
 gsutil -m rm -rf "gs://${BUCKET_NAME}/temp/*"
 gsutil rb gs://${BUCKET_NAME}
+
+
+
+
+SET GOOGLE_APPLICATION_CREDENTIALS=C:\Users\russe\dev\image-labeller\client_cred.json
+SET PUBSUB_TOPIC=image-labeller-inputs
+SET PUBSUB_TOPIC_SUB=image-labeller-input-subscription
+SET PUBSUB_TOPIC_SUB_ENDPOINT=image_labeller_process_subscriber
+
+gcloud pubsub topics create %PUBSUB_TOPIC%
+gcloud pubsub subscriptions create %PUBSUB_TOPIC_SUB% --topic %PUBSUB_TOPIC% --push-endpoint https://us-central1-rustyware-dev.cloudfunctions.net/%PUBSUB_TOPIC_SUB_ENDPOINT% --ack-deadline 30
+

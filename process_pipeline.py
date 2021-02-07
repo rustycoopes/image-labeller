@@ -44,14 +44,14 @@ if __name__ == "__main__":
     publisher = ImgPathPubisher(config['DEFAULT']['ProjectName'], config['DEFAULT']['ProcessEntryTopic'])
     dropb = RussDropBox(config['DROPBOX-SECRETS']['Token'], max_file_count = int(config['DROPBOX']['MaxSize']), batch_size = int(config['DROPBOX']['BatchSize']))
     processor = ImgProcessor(dropb, publisher)
-    #processor.publish_dbx_library()
+    processor.publish_dbx_library()
 
     # test write to bigquery
-    import external_api.gcp_biquery
-    db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
-    #db.write_image_data('Russ Test', 'default', 100)
-    db.remove_duplicates()
-    #db.delete_image_data('Russ Test')
+    # import external_api.gcp_biquery
+    # db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
+    # db.write_image_data('Russ Test', 'default', 100)
+    # db.remove_duplicates()
+    # db.delete_image_data('Russ Test')
     
 
 
