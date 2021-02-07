@@ -38,13 +38,20 @@ if __name__ == "__main__":
     config.read('./config/main.ini')
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=config['DEFAULT']['CredentialsFile']
     logging.info('gcp credentials set to be read from file {}'.format(os.environ["GOOGLE_APPLICATION_CREDENTIALS"]))
-    publisher = ImgPathPubisher(config['DEFAULT']['ProjectName'], config['DEFAULT']['ProcessEntryTopic'])
     config.read_string(utils_read_dbx_cfg_from_gcs())
+  
+    # Connect to dropbox, find all images and publish to subsub
+    publisher = ImgPathPubisher(config['DEFAULT']['ProjectName'], config['DEFAULT']['ProcessEntryTopic'])
     dropb = RussDropBox(config['DROPBOX-SECRETS']['Token'], max_file_count = int(config['DROPBOX']['MaxSize']), batch_size = int(config['DROPBOX']['BatchSize']))
     processor = ImgProcessor(dropb, publisher)
-   # processor.publish_dbx_library()
+    #processor.publish_dbx_library()
 
+    # test write to bigquery
     import external_api.gcp_biquery
     db = external_api.gcp_biquery.BQWriter('image_labels', 'labels')
-    db.write_image_data('Russ Test', 'default', 100)
-    db.delete_image_data('Russ Test')
+    #db.write_image_data('Russ Test', 'default', 100)
+    db.remove_duplicates()
+    #db.delete_image_data('Russ Test')
+    
+
+
