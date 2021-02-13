@@ -16,6 +16,8 @@ cloudstorage = "*"
 google-cloud-storage = "*"
 google-cloud-bigquery = "*"
 dropbox = "*"
+pytest-mock = "*"
+mocker = "*"
 
 [requires]
 python_version = "3.7"

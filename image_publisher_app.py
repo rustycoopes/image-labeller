@@ -1,28 +1,12 @@
 from external_api.dbx import RussDropBox
 from external_api.gcp_pubsub import ImgPathPubisher
+from processing.image_publishing import ImgPublisher
+from processing.image_labeller_pipeline import ImgLabelPipeLine
+from processing.image_labeller_pipeline import ImgLabelPersitanceMock
 import configparser
 import os
 import logging
 import sys
-class ImgProcessor():
-
-    def __init__(self, dropb, publisher ):
-        self._drop_bx = dropb
-        self._publisher =  publisher
-        pass
-
-    def publish_dbx_library(self):
-        publish_count = 0
-        for path in self._drop_bx.get_image_paths():
-            if not self._should_ignore(path):
-                publish_count = publish_count + 1
-                self._publisher.publish(path)
-                if publish_count % 100 == 0:
-                    logging.info('PUBLISHED {} IMAGES'.format(publish_count))
-        
-    def _should_ignore(self, path):
-        return 'nail' in path 
-        
 
 def utils_read_dbx_cfg_from_gcs():
     from google.cloud import storage
@@ -34,7 +18,7 @@ def utils_read_dbx_cfg_from_gcs():
 def setup_logger():
     logging.basicConfig( 
     filename='process_pipeline.log',
-    level=logging.DEBUG, 
+    level=logging.INFO, 
     format='[%(asctime)s]{%(pathname)s:%(lineno)d}%(levelname)s- %(message)s', 
     datefmt='%H:%M:%S'
     ) 
@@ -56,8 +40,13 @@ if __name__ == "__main__":
     # Connect to dropbox, find all images and publish to subsub
     publisher = ImgPathPubisher(config['DEFAULT']['ProjectName'], config['DEFAULT']['ProcessEntryTopic'])
     dropb = RussDropBox(config['DROPBOX-SECRETS']['Token'], max_file_count = int(config['DROPBOX']['MaxSize']), batch_size = int(config['DROPBOX']['BatchSize']))
-    processor = ImgProcessor(dropb, publisher)
-    processor.publish_dbx_library()
+    
+    processor = ImgPublisher(dropb, publisher)
+    mockStorage  =ImgLabelPersitanceMock('mock','mock')
+    lblPipeLine = ImgLabelPipeLine(dropb, mockStorage)
+
+    for path in processor.publish_dbx_library(True):
+        lblPipeLine.label(path)
 
     # test write to bigquery
     # import external_api.gcp_biquery

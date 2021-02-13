@@ -10,11 +10,11 @@ class RussDropBox():
 
     def get_image_paths(self):
         dbx = dropbox.Dropbox(self._api_key)
-        logging.info('calling into dropbox - recurse {}, max files {}, batch_size {}'.format(self._recurse, self._max_file_count, self._batch_size))
+        logging.debug('calling into dropbox - recurse {}, max files {}, batch_size {}'.format(self._recurse, self._max_file_count, self._batch_size))
         response = dbx.files_list_folder('' , recursive=self._recurse, limit=self._batch_size,)
 
         totalfile_count = 0
-        logging.info('Getting more files from dbx, current count {} - max set at {}'.format(totalfile_count, self._max_file_count))
+        logging.debug('Getting more files from dbx, current count {} - max set at {}'.format(totalfile_count, self._max_file_count))
         
         for entry in response.entries:
             if totalfile_count > self._max_file_count:
@@ -28,7 +28,7 @@ class RussDropBox():
 
         while response.has_more:
             response = dbx.files_list_folder_continue(response.cursor )
-            logging.info('Getting more files from dbx, current count {} - max set at {}'.format(totalfile_count, self._max_file_count))
+            logging.debug('Getting more files from dbx, current count {} - max set at {}'.format(totalfile_count, self._max_file_count))
             for entry in response.entries:
                 if totalfile_count > self._max_file_count:
                     logging.info('Max file count reached, exiting')

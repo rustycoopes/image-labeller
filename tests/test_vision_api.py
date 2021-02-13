@@ -6,6 +6,7 @@ import io
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\russe\\OneDrive\\dev\\credentials\\gcp-dev-labeller_cred.json"
 import logging
 def test_call_google_Service():
+    pass
     client = vision.ImageAnnotatorClient()
     path = './tests/test_photo.jpg'
     with io.open(path, 'rb') as image_file:
